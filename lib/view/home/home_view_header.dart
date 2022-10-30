@@ -6,6 +6,8 @@ class HeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController controller = TextEditingController();
+    GlobalKey<FormState> key = GlobalKey<FormState>();
     return Column(
       children: [
         Row(
@@ -16,12 +18,29 @@ class HeaderSection extends StatelessWidget {
               children: [
                 SizedBox(
                   width: 300,
-                  child: TextFormField(
-                    decoration: const InputDecoration(hintText: "Ingrese Key"),
+                  child: Form(
+                    key: key,
+                    child: TextFormField(
+                      controller: controller,
+                      decoration: const InputDecoration(hintText: "Ingrese Key"),
+                      validator: (value) {
+                        print(value);
+                        if (value == null || value.isEmpty){
+                          return "empty";
+                        }
+                        return null;
+                      },
+                    ),
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: (){}, 
+                  onPressed: (){
+                    final result = key.currentState?.validate();
+                    if(result == true){
+                      print("is result");
+                      BlocProvider.of<HomeBloc>(context).add(InitHomeEvent(controller.text));
+                    }
+                  }, 
                   child: const Text("Conectar")
                 ),
               ],

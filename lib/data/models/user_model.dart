@@ -19,6 +19,6 @@ class UserModel {
     email       : jsonMap['email'], 
     username    : jsonMap['username'], 
     realname    : jsonMap['realname'], 
-    profileImg  : jsonMap['profileImg']
+    profileImg  : jsonMap['profile_img']
   );
 }

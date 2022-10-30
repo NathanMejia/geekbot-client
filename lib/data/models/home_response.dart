@@ -14,7 +14,7 @@ class HomeResponse {
   factory HomeResponse.fromJsonMap( Map<String,dynamic> jsonMap) =>HomeResponse(
     id    : jsonMap["id"], 
     name  : jsonMap["name"], 
-    users : (jsonMap["users"] as List<Map<String,dynamic>>).map(
+    users : (jsonMap["users"] as List<dynamic>).map(
       (e) => UserModel.fromJsonMap(e)
     ).toList()
   );
