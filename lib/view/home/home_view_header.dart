@@ -24,7 +24,7 @@ class HeaderSection extends StatelessWidget {
                       controller: controller,
                       decoration: const InputDecoration(hintText: "Ingrese Key"),
                       validator: (value) {
-                        print(value);
+                        
                         if (value == null || value.isEmpty){
                           return "empty";
                         }
@@ -37,7 +37,6 @@ class HeaderSection extends StatelessWidget {
                   onPressed: (){
                     final result = key.currentState?.validate();
                     if(result == true){
-                      print("is result");
                       BlocProvider.of<HomeBloc>(context).add(InitHomeEvent(controller.text));
                     }
                   }, 

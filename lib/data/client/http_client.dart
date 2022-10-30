@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:geek_bot_client/data/models/home_response.dart';
 import 'package:geek_bot_client/data/models/standup_responde_model.dart';
 import 'package:geek_bot_client/data/models/user_model.dart';
@@ -16,9 +17,9 @@ class HttpClient {
     final resp = await http.get(uri , headers: {"Authorization" : apiKey});
 
     if (resp.statusCode != 200){
-      // throw Exception("HTTP request Error : code - ${resp.statusCode}");
-      print(resp.body);
-      print(resp.statusCode);
+
+      debugPrint(resp.body);
+      debugPrint(resp.statusCode.toString());
       return[];
     }
 
@@ -37,8 +38,8 @@ class HttpClient {
     final resp = await http.get(uri , headers: {"Authorization" : apiKey});
 
     if (resp.statusCode != 200){
-      print(resp.body);
-      print(resp.statusCode);
+      debugPrint(resp.body);
+      debugPrint(resp.statusCode.toString());
       return[];
     }
 
@@ -58,8 +59,8 @@ class HttpClient {
     final resp = await http.get(uri , headers: {"Authorization" : apiKey});
 
     if (resp.statusCode != 200){
-      print(resp.body);
-      print(resp.statusCode);
+      debugPrint(resp.body);
+      debugPrint(resp.statusCode.toString());
       return[];
     }
 
