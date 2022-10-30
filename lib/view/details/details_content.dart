@@ -72,11 +72,11 @@ class _QuestionZone extends StatelessWidget {
   final SurveyQuestionModel surveyQuestionModel;
   @override
   Widget build(BuildContext context) {
-    const color = Colors.white;
+    final color = _codeToColor(surveyQuestionModel.color);
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Container(
-        color: color.withAlpha(50),
+        color: color.withOpacity(0.2),
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: Column(
@@ -86,7 +86,33 @@ class _QuestionZone extends StatelessWidget {
                   children: [
                     Text(surveyQuestionModel.question),
                     const Divider(),
-                    Text(surveyQuestionModel.answer),
+                    Tooltip(
+                      message: "Copy to Clipboard",
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: color.withOpacity(0.6),
+                          foregroundColor: Colors.yellow,
+                        ),
+                        onPressed: () {
+                          Clipboard.setData(ClipboardData(text: surveyQuestionModel.answer))
+                            .then((value) {
+                              const snackBar = SnackBar(
+                                backgroundColor: Colors.green,
+                                duration: Duration(seconds: 1),
+                                content: Text("Copied to Clipboard 👌🙂", 
+                                  style: TextStyle(
+                                    fontSize: 18, 
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold
+                                  ), 
+                                )
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            });
+                        },
+                        child: Text(surveyQuestionModel.answer, style: const TextStyle(color: Colors.black,))
+                      ),
+                    ),
                   ],
                 ),
               )
@@ -95,5 +121,10 @@ class _QuestionZone extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Color _codeToColor( String code ){
+    final hexCode = code.replaceAll("#", '');
+    return Color(int.parse(hexCode, radix: 16));
   }
 }

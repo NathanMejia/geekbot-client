@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geek_bot_client/data/models/standup_responde_model.dart';
 import 'package:geek_bot_client/data/models/user_model.dart';
 import 'package:geek_bot_client/logic/DetailsBloc/details_bloc.dart';
+import 'package:flutter/services.dart';
 
 part 'details_header.dart';
 part 'details_content.dart';
